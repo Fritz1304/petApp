@@ -1,5 +1,7 @@
 package jorgedev.app.petapp.infrastructure.adapter.out.persistence;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import jorgedev.app.petapp.application.ports.out.UserRepositoryPort;
@@ -33,5 +35,23 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
                 savedEntity.getUsername(),
                 savedEntity.getPassword()
         );
+    }
+
+    @Override
+    public List<User> findAll() {
+        return springDataUserRepository.findAll()
+                .stream()
+                .map(userEntity -> new User(
+                        userEntity.getId(),
+                        userEntity.getName(),
+                        userEntity.getUsername(),
+                        userEntity.getPassword()
+                ))
+                .toList();
+    }
+
+    @Override
+    public void delete(String id) {
+        springDataUserRepository.deleteById(id);
     }
 }

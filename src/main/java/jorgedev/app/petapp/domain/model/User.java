@@ -7,6 +7,7 @@ public class User {
     private final String username;
     private final String password;
 
+    // Falta agregar las debidas restricciones referentes a seguridada y reglas del negocio
     public User(String id, String name, String username, String password) {
         this.id = id;
         this.name = name;

@@ -48,4 +48,9 @@ public class PetPersistenceAdapter implements PetRepositoryPort {
                 ))
                 .toList();
     }
+
+    @Override
+    public void delete(String petId) {
+        springDataPetRepository.deleteById(petId);
+    }
 }

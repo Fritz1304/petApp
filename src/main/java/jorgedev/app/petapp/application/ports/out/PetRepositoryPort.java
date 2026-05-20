@@ -8,4 +8,5 @@ import java.util.List;
 public interface PetRepositoryPort {
     Pet save(Pet pet);
     List<Pet> findAll();
+    void delete(String petId);
 }

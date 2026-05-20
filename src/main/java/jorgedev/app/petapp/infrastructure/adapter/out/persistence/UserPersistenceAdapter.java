@@ -54,4 +54,23 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
     public void delete(String id) {
         springDataUserRepository.deleteById(id);
     }
+
+    @Override
+    public User update(User user) {
+        UserEntity userEntity = new UserEntity(
+                user.getId(),
+                user.getName(),
+                user.getUsername(),
+                user.getPassword()
+        );
+
+        UserEntity updatedEntity = springDataUserRepository.save(userEntity);
+
+        return new User(
+                updatedEntity.getId(),
+                updatedEntity.getName(),
+                updatedEntity.getUsername(),
+                updatedEntity.getPassword()
+        );
+    }
 }

@@ -4,5 +4,5 @@ import jorgedev.app.petapp.application.dto.CreatePetCommand;
 import jorgedev.app.petapp.application.dto.PetResponse;
 
 public interface CreatePetUseCase {
-    PetResponse createPet(CreatePetCommand command);
+    PetResponse createPet(String username, CreatePetCommand command);
 }

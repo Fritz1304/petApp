@@ -1,6 +1,7 @@
 package jorgedev.app.petapp.infrastructure.adapter.out.persistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -72,5 +73,16 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
                 updatedEntity.getUsername(),
                 updatedEntity.getPassword()
         );
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return springDataUserRepository.findByUsername(username)
+                .map(userEntity -> new User(
+                        userEntity.getId(),
+                        userEntity.getName(),
+                        userEntity.getUsername(),
+                        userEntity.getPassword()
+                ));
     }
 }

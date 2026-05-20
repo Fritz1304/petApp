@@ -7,6 +7,7 @@ import jorgedev.app.petapp.infrastructure.adapter.out.persistence.repository.Spr
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PetPersistenceAdapter implements PetRepositoryPort {
@@ -37,8 +38,8 @@ public class PetPersistenceAdapter implements PetRepositoryPort {
     }
 
     @Override
-    public List<Pet> findAll() {
-        return springDataPetRepository.findAll()
+    public List<Pet> findAllByIds(List<String> petIds) {
+        return springDataPetRepository.findAllById(petIds)
                 .stream()
                 .map(petEntity -> new Pet(
                         petEntity.getId(),
@@ -47,6 +48,17 @@ public class PetPersistenceAdapter implements PetRepositoryPort {
                         petEntity.getWeightInGrams()
                 ))
                 .toList();
+    }
+
+    @Override
+    public Optional<Pet> findById(String petId) {
+        return springDataPetRepository.findById(petId)
+                .map(petEntity -> new Pet(
+                        petEntity.getId(),
+                        petEntity.getName(),
+                        petEntity.getType(),
+                        petEntity.getWeightInGrams()
+                ));
     }
 
     @Override
